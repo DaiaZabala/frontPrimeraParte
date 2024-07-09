@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tabla de Usuarios</title>
+    <link rel="stylesheet" href="/static/css/tabla_usuarios.css">
+</head>
+<body>
+
+<!-- Scripts al final del body -->
+<header id="header"></header>
+
+<main>
+    <section class="container">
+        <h1 id="titulo">TABLA USUARIOS</h1>
+        <div id="cont-bt-registrar">
+            <p id="añadir">Añadir usuario:</p>
+            <!-- Botón Nuevo -->
+            <a class="nuevo" href="ingresar_usuario.html">Nuevo</a>
+
+            <section v-if="error">Lo sentimos, se produjo un error</section>
+            <section v-else>
+                <section v-if="cargando">
+                    <p>Cargando...</p>
+                </section>
+                <section v-else>
+                    <div>
+                        <table class="tabla">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Apellido</th>
+                                    <th>Nombre de Usuario</th>
+                                    <th>Correo Electrónico</th>
+                                    <th>Contraseña</th>
+                                    <th>Sexo</th>
+                                    <th>País</th>
+                                    <th>Imagen</th>
+                                    <th>Rol</th>
+                                    <th>Acciones</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Iteración sobre usuarios -->
+                                {% for usuario in usuarios %}
+                                    <tr>
+                                        <td>{{ usuario.id }}</td>
+                                        <td>{{ usuario.nombre }}</td>
+                                        <td>{{ usuario.apellido }}</td>
+                                        <td>{{ usuario.nombre_usuario }}</td>
+                                        <td>{{ usuario.correo }}</td>
+                                        <td>{{ usuario.contraseña }}</td>
+                                        <td>{{ usuario.sexo }}</td>
+                                        <td>{{ usuario.pais }}</td>
+                                         <!-- Ejemplo de cómo debería verse la parte relevante de tu plantilla HTML -->
+                                         <td>
+                                            <img src="{{ url_for('static', filename='temp/' ~ usuario.imagen) }}" alt="Imagen de {{ usuario.nombre }}" width="100" height="100">
+                                        </td>
+                                                                             
+                                         <td>{{ usuario.rol }}</td>
+                                         <td>
+                                            <button type="button"  v-on:click="eliminar(usuario.id)">ELIMINAR</button>
+                                        </td>
+                                        <td>
+                                            <a class="boton" href="{{ url_for('update', id=usuario.id) }}">Editar</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </section>
+        </div>
+    </section>
+</main>
+
+<footer></footer>
+<!-- Enlaces a archivos estáticos y scripts -->
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="/static/js/tabla_usuarios.js"></script>
+<script src="/static/js/header_tabla.js"></script>
+<script src="/static/js/links.js"></script>
+<script>
+    const urls = {
+        ingresar_usuario: "{{ url_for('ingresar_usuario') }}",
+        tabla_usuarios: "{{ url_for('tabla_usuarios') }}",
+    };
+
+</script>
+
+</body>
+</html>
