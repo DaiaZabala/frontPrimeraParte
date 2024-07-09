@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/editar_usuario.css">
+    <title>App Admin - Editar</title>
+</head>
+<body>
+    <header></header>
+    
+    <main>
+        <div id="cont-main">
+            <div id="cont-formulario">
+                <div id="titulo">
+                    <h2>Datos Actuales:</h2>
+                    <table>
+                        <tr>
+                            <td>ID: {{ usuario.id }}</td>
+                            <td>Nombre: {{ usuario.nombre }}</td>
+                            <td>Apellido: {{ usuario.apellido }}</td>
+                            <td>Nombre de usuario: {{ usuario.nombre_usuario }}</td>
+                            <td>Correo: {{ usuario.correo }}</td>
+                            <td>Contraseña: {{ usuario.contraseña }}</td>
+                            <td>Sexo: {{ usuario.sexo }}</td>
+                            <td>País: {{ usuario.pais }}</td>
+                            <td>Imagen de Usuario: <img src="{{ usuario.imagen }}" alt="imagenUsuario"></td>
+                        </tr>
+                    </table>
+                </div>
+                <h1>Actualizar Datos</h1>
+                <form class="campos-form" action="{{ url_for('update', id=usuario.id) }}" method="post">
+                    <div>
+                        <!-- value="{{ usuario.id }}" -->
+                        <label for="id">ID</label>
+                        <input type="number" name="id" id="id" disabled>
+                    </div>
+            
+                    <div>
+                        <label for="nombre">Nombre:</label>
+                        <input class="input-form" type="text" id="nombre" name="nombre"  disabled>
+                    </div>
+            
+                    <div class="entrada">
+                        <label for="apellido">Apellido:</label>
+                        <input class="input-form" type="text" name="apellido" id="apellido" disabled>
+                    </div>
+            
+                    <div class="entrada">
+                        <label for="nombre_usuario">Nombre de usuario:</label>
+                        <input class="input-form" type="text" name="nombre_usuario" id="nombre_usuario">
+                    </div>
+            
+                    <div class="entrada">
+                        <label for="correo_electronico">Correo electrónico:</label>
+                        <input class="input-form" type="email" name="correo" id="correo" disabled>
+                    </div>
+            
+                    <div class="entrada">
+                        <label for="contraseña">Contraseña:</label>
+                        <input class="input-form" type="password" name="contraseña" id="contraseña" disabled>
+                    </div>
+            
+                    <div class="entrada">
+                        <label for="sexo">Sexo:</label>
+                        <input class="input-form" type="text" name="sexo" id="sexo"  disabled>
+                    </div>
+            
+                    <div class="entrada">
+                        <label for="pais">País:</label>
+                        <input class="input-form" type="text" name="pais" id="pais" disabled>
+                    </div>
+            
+                    <div class="entrada">
+                        <label for="imagen">Imagen:</label>
+                        <input class="input-form" type="text" name="imagen" id="imagen" disabled>
+                    </div>
+            
+                    <div>
+                        <label for="rol">Rol de usuario (Ingresar 1- USUARIO 2- ADMINISTRADOR):</label>
+                        <input  type="number" id="rol" name="rol">
+                    </div>
+                    
+                    <button class="modificar" type="submit">MODIFICAR</button>
+
+                </form>
+                <br>
+                <a href="{{ url_for('tabla_usuarios') }}" style="color: black;">Volver a Tabla de Usuarios</a>
+            </div>
+        </div>
+    </main>
+    
+    <footer></footer>
+    <script>
+        const urls = {
+            tabla_usuarios: "{{ url_for('tabla_usuarios') }}",
+            ingresar_usuario: "{{ url_for('ingresar_usuario') }}"
+        };
+    </script>
+    <script src="/static/js/editar_usuario.js"></script>
+    <script src="/static/js/header_editar.js"></script>
+    <script src="/static/js/datos_editar.js"></script>
+</body>
+</html>
